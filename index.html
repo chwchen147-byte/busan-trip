@@ -1,0 +1,297 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Busan旅行手札</title>
+<style>
+:root{--cream:#FFF9F0;--blue:#D5E9F6;--mint:#DDEBE4;--ink:#435E75;--body:#485F70;--rose:#A47780;--brown:#76685E}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--body);font-family:-apple-system,"PingFang TC",sans-serif;line-height:1.7}
+.hero{text-align:center;background:linear-gradient(145deg,#D5E9F6,#DDEBE4);padding:55px 18px 42px}
+.hero .emoji{font-size:42px}
+h1{font-size:clamp(30px,7vw,46px);color:var(--ink)}
+.pill{display:inline-block;background:var(--mint);border-radius:30px;padding:7px 17px}
+.countdown{font-size:19px;font-weight:bold;color:var(--ink);margin-top:20px}
+nav{position:sticky;top:0;z-index:10;display:flex;overflow-x:auto;gap:9px;padding:12px;background:#fffaf3;border-bottom:1px solid #eee}
+nav a{flex-shrink:0;text-decoration:none;color:var(--ink);background:white;border:1px solid #bed5e1;border-radius:30px;padding:8px 15px}
+main{max-width:850px;margin:auto;padding:20px 16px}
+.card{background:white;border:1px solid #eee5e0;border-radius:25px;padding:24px;margin:18px 0;scroll-margin-top:90px}
+h2{color:var(--ink);font-size:24px}
+h3{color:var(--brown)}
+.sub{background:#eef7fa;border-radius:18px;padding:18px;margin:14px 0}
+.pink{background:#fbf0ef}
+.flight{font-size:28px;font-weight:bold;color:var(--ink)}
+.day{border-left:5px solid #bcdbe7;padding:4px 0 10px 18px;margin:22px 0}
+.day h3{color:var(--ink)}
+.day li{margin:7px 0}
+.check{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px dashed #e8e1dc;cursor:pointer}
+.check input{width:23px;height:23px;flex-shrink:0;accent-color:#85b7a4;margin-top:4px}
+.check span{flex:1}
+.packing .check input:checked+span{text-decoration:line-through;opacity:.55}
+.reminders .check input:checked+span,.rules .check input:checked+span{text-decoration:none;opacity:1}
+.progress{height:12px;background:#e5efec;border-radius:20px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;width:0;background:#91c4b0;transition:width .2s}
+button{background:#f2e7e4;color:var(--rose);border:0;border-radius:20px;padding:8px 14px;font:inherit}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.note{background:#fff6e8;padding:14px;border-radius:12px;margin-top:18px;font-size:14px}
+.muted{font-size:13px;color:#818b90}
+a{color:#527e9a}
+footer{text-align:center;padding:40px;color:var(--rose)}
+</style>
+</head>
+<body>
+
+<header class="hero" id="home">
+<div class="emoji">☁️ ✈️ 🩵</div>
+<p class="pill">2026.11.26 — 12.01 · 6 DAYS</p>
+<h1>Busan旅行手札</h1>
+<p>一起去看海、吃美食、收集快樂！</p>
+<div class="countdown" id="countdown">正在計算倒數…</div>
+</header>
+
+<nav>
+<a href="#home">首頁</a>
+<a href="#flights">航班</a>
+<a href="#itinerary">每日行程</a>
+<a href="#hotel">住宿</a>
+<a href="#reminders">每日提醒</a>
+<a href="#packing">行李清單</a>
+<a href="#rules">旅行小守則</a>
+</nav>
+
+<main>
+<section class="card" id="flights">
+<h2>✈️ 來回航班</h2>
+<div class="sub">
+<p class="pill">GO · 11/26</p>
+<p class="flight">TPE → PUS</p>
+<p>大韓航空 KE2086</p>
+<p><b>17:30 起飛 → 20:45 抵達</b></p>
+<p>15:00 機場櫃檯報到（原行程安排）</p>
+</div>
+<div class="sub pink">
+<p class="pill">BACK · 12/01</p>
+<p class="flight">PUS → TPE</p>
+<p>大韓航空 KE2085</p>
+<p><b>14:50 起飛 → 16:30 抵達</b></p>
+<p>11:50 機場櫃檯報到（原行程安排）</p>
+</div>
+<p>🧳 託運行李：1 件／23 kg</p>
+<p class="muted">時間均為當地時間，實際航班與行李規定以航空公司通知為準。</p>
+</section>
+
+<section class="card" id="itinerary">
+<h2>🗓️ 六天行程</h2>
+<div id="days"></div>
+</section>
+
+<section class="card" id="hotel">
+<h2>🏨 住宿資訊</h2>
+<h3>Seomyeon City Hotel G&G</h3>
+<p><b>英文地址：</b>38 Bujeon-ro 20beon-gil, Busanjin District, Busan, South Korea</p>
+<p><b>韓文地址：</b>부산광역시 부산진구 부전로20번길 38</p>
+<a href="https://www.google.com/maps/search/?api=1&query=38%20Bujeon-ro%2020beon-gil%20Busan" target="_blank">📍 開啟飯店地圖</a>
+</section>
+
+<section class="card reminders" id="reminders">
+<h2>📌 每日提醒</h2>
+<p class="muted">依照行程安排，可逐項打勾，進度會保存在這台裝置。</p>
+<div id="reminder-content"></div>
+</section>
+
+<section class="card packing" id="packing">
+<h2>🧳 行李清單</h2>
+<div class="row">
+<strong id="packing-count">已帶 0 項</strong>
+<button id="reset" type="button">清除勾選</button>
+</div>
+<div class="progress"><div id="bar"></div></div>
+<div id="packing-content"></div>
+<div class="note">行動電源與備用鋰電池應依航空公司規定放置於隨身行李，請勿直接託運。液體限制也請依機場公告確認。</div>
+</section>
+
+<section class="card rules" id="rules">
+<h2>💌 旅行不吵架小守則</h2>
+<p>一起簽下快樂旅行承諾書 ♡</p>
+<div id="rules-content"></div>
+<label class="check">
+<input type="checkbox" id="agree">
+<span>♡ 我同意以上旅行小守則，開開心心去釜山！</span>
+</label>
+</section>
+</main>
+<footer>BUSAN 2026 ♡ 旅途愉快！</footer>
+
+<script>
+const departure=new Date("2026-11-26T17:30:00+08:00");
+const tripEnd=new Date("2026-12-02T00:00:00+09:00");
+function countdown(){
+const now=Date.now(),diff=departure-now;
+const el=document.getElementById("countdown");
+if(diff>0){
+const d=Math.floor(diff/86400000);
+const h=Math.floor(diff%86400000/3600000);
+const m=Math.floor(diff%3600000/60000);
+el.textContent=`✈️ 距離出發還有 ${d} 天 ${String(h).padStart(2,"0")} 小時 ${String(m).padStart(2,"0")} 分鐘 ♡`;
+}else if(now<tripEnd){
+el.textContent="🩵 釜山旅行進行中 ♡";
+}else{
+el.textContent="☁️ 把釜山的快樂好好收藏 ♡";
+}}
+countdown();setInterval(countdown,1000);
+
+const itinerary=[
+["DAY 1 · 11/26（四）｜出發釜山",["桃園機場報到、搭乘 KE2086","抵達釜山、前往飯店","辦理入住、休息"]],
+["DAY 2 · 11/27（五）｜海雲台",["海雲台","膠囊列車","新世界百貨"]],
+["DAY 3 · 11/28（六）｜廣安里",["廣安里","海灘、選物小店","無人機表演（依現場公告）","遊艇看煙火（預約資訊 21:30–22:30）"]],
+["DAY 4 · 11/29（日）｜南浦",["白淺灘文化村","新東亞市場","BIFF 廣場","光復路時尚街","樂天超市"]],
+["DAY 5 · 11/30（一）｜西面",["西面逛街、美食","樂天百貨（8 樓免稅）","大創","OLIVE YOUNG"]],
+["DAY 6 · 12/01（二）｜回台灣",["退房","最後逛 OLIVE YOUNG（視時間）","前往機場、搭乘 KE2085"]]
+];
+const days=document.getElementById("days");
+itinerary.forEach(([title,items])=>{
+const div=document.createElement("div");div.className="day";
+const h=document.createElement("h3");h.textContent=title;
+const ul=document.createElement("ul");
+items.forEach(item=>{const li=document.createElement("li");li.textContent=item;ul.appendChild(li)});
+div.append(h,ul);days.appendChild(div);
+});
+
+const packing={
+"📄 證件與金錢":["護照","電子機票","住宿訂房資料","旅遊保險資料","身分證","信用卡","韓元現金","台幣現金","交通卡／T-money","護照影本或電子備份"],
+"📱 電子用品":["手機","手機充電線","充電頭","行動電源（隨身攜帶）","韓國轉接插頭（220V／圓孔）","耳機","相機","相機充電器","備用記憶卡","網卡／eSIM 設定資料"],
+"👚 衣物與配件":["上衣","褲子／裙子","內衣","內褲","襪子","睡衣","外套／保暖衣","圍巾","手套","帽子","好走的鞋","備用鞋／拖鞋","隨身小包","購物袋"],
+"🧴 盥洗與保養":["牙刷","牙膏","洗面乳","卸妝用品","化妝水","乳液／保濕霜","防曬乳","護唇膏","化妝品","化妝工具","梳子","髮圈／髮夾","衛生紙／濕紙巾","衛生棉／生理用品"],
+"💊 健康與其他":["個人常用藥","處方藥與必要證明","OK 繃","口罩","酒精乾洗手","眼鏡／隱形眼鏡","隱形眼鏡藥水","摺疊傘","保溫瓶","行李箱","行李吊牌","行李鎖","行李秤"]
+};
+
+const reminders={
+"出發前｜11/25 以前":[
+"確認護照有效期限與機票姓名",
+"確認韓國入境要求與電子入境卡是否適用",
+"檢查 eSIM／網路方案",
+"確認飯店訂房及交通方式",
+"檢查天氣、準備保暖衣物",
+"確認膠囊列車與遊艇預約資料",
+"完成行李清單並檢查託運重量"
+],
+"DAY 1｜11/26 出發":[
+"確認護照、手機、錢包、機票",
+"行動電源放隨身行李",
+"15:00 依原安排抵達機場櫃檯",
+"確認 KE2086 登機門與航班狀態",
+"抵達後開啟網路、確認飯店交通"
+],
+"DAY 2｜11/27 海雲台":[
+"確認膠囊列車預約時間與搭車地點",
+"查看海雲台天氣與風勢",
+"準備交通卡、行動電源",
+"確認新世界百貨營業時間",
+"攜帶護照，確認會員優惠與退稅規定"
+],
+"DAY 3｜11/28 廣安里":[
+"甜筒造型蛋糕：依預約規定提前一天訂購",
+"確認無人機表演是否舉辦及場次",
+"核對遊艇預約 21:30–22:30",
+"遊艇至少提前 25 分鐘抵達 YACHTHOLIC 報到櫃檯",
+"海邊與船上注意保暖、防風"
+],
+"DAY 4｜11/29 南浦":[
+"白淺灘文化村：南浦站 6 號出口，搭 7 或 508 號公車（出發前確認）",
+"準備好走的鞋，留意坡道與階梯",
+"確認新東亞市場、BIFF 廣場店家營業時間",
+"購物記得索取退稅單據",
+"確認樂天超市營業時間與退稅方式"
+],
+"DAY 5｜11/30 西面":[
+"安排西面美食與逛街路線",
+"樂天百貨 8 樓免稅購物，確認護照與取貨規定",
+"大創與 OLIVE YOUNG 採購清單",
+"整理戰利品並檢查行李重量",
+"確認隔天退房與機場交通"
+],
+"DAY 6｜12/01 回程":[
+"確認房間、插座、浴室有無遺漏物品",
+"辦理退房",
+"視時間最後逛 OLIVE YOUNG",
+"11:50 依原安排抵達機場櫃檯",
+"確認退稅、行李重量與登機門",
+"搭乘 KE2085，14:50 起飛"
+]
+};
+
+const rules=[
+"不甩臉、不掛臉，有問題、不開心要直接當面說出來！",
+"只能動嘴，可以親，可以說，可以咬，但是不許動手。",
+"絕不說：「我累了，你們去吧，我在這等你們。」",
+"互相拍照，不好看絕不生氣，多鼓勵、多指導。",
+"不和陌生人發生爭執、產生衝突。",
+"不能隨時抱怨，不能說負能量的話。",
+"要瘋一起發瘋，不能擺架子。",
+"不可以說隨便及我不知道。",
+"絕不挑三揀四。",
+"一定要準時，不准拖拖拉拉。",
+"不抱怨、不埋怨，要嘛做攻略，要嘛聽安排。",
+"不可以經常玩手機、不理身邊人。",
+"不要說「太貴了、不好玩、沒意思」等話語。",
+"如有建議和想法，及時提出來溝通討論，不可以帶情緒。",
+"旅途中遇到有好感的人，要極力為朋友爭取聯繫方式。"
+];
+
+function read(key){
+try{return JSON.parse(localStorage.getItem(key)||"{}")}
+catch(e){return {}}
+}
+function save(key,data){
+try{localStorage.setItem(key,JSON.stringify(data))}
+catch(e){}
+}
+function build(target,groups,key,callback){
+const host=document.getElementById(target),saved=read(key);
+Object.entries(groups).forEach(([group,items])=>{
+const h=document.createElement("h3");h.textContent=group;host.appendChild(h);
+items.forEach((item,index)=>{
+const id=group+"-"+index;
+const label=document.createElement("label");label.className="check";
+const input=document.createElement("input");input.type="checkbox";input.checked=!!saved[id];
+const span=document.createElement("span");span.textContent=item;
+input.addEventListener("change",()=>{
+saved[id]=input.checked;save(key,saved);
+if(callback)callback();
+});
+label.append(input,span);host.appendChild(label);
+});
+});
+if(callback)callback();
+}
+const total=Object.values(packing).reduce((n,a)=>n+a.length,0);
+function updateProgress(){
+const count=document.querySelectorAll("#packing-content input:checked").length;
+document.getElementById("packing-count").textContent=`已帶 ${count} / ${total} 項 ♡`;
+document.getElementById("bar").style.width=(count/total*100)+"%";
+}
+build("packing-content",packing,"busan-packing-v2",updateProgress);
+build("reminder-content",reminders,"busan-reminders-v2");
+
+const rulesHost=document.getElementById("rules-content");
+rules.forEach((rule,i)=>{
+const p=document.createElement("p");
+p.style.borderBottom="1px dashed #eee";
+p.style.paddingBottom="12px";
+p.textContent=(i+1)+". "+rule;
+rulesHost.appendChild(p);
+});
+const agree=document.getElementById("agree");
+agree.checked=!!read("busan-rules-v2").agree;
+agree.addEventListener("change",()=>save("busan-rules-v2",{agree:agree.checked}));
+document.getElementById("reset").addEventListener("click",()=>{
+if(!confirm("確定要清除全部行李勾選嗎？"))return;
+document.querySelectorAll("#packing-content input").forEach(i=>i.checked=false);
+save("busan-packing-v2",{});updateProgress();
+});
+</script>
+</body>
+</html>
